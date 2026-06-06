@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -20,8 +21,20 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pandas numpy scikit-learn xgboost mlflow datasets huggingface_hub streamlit joblib
+          pip install -r tourism_project/requirements.txt
 
-      - name: Verify Pipeline
+      - name: Verify Dataset Files
+        run: |
+          ls tourism_project/data
+
+      - name: Verify Model File
+        run: |
+          ls tourism_project/model_building
+
+      - name: Verify Deployment Files
+        run: |
+          ls tourism_project/deployment
+
+      - name: Pipeline Validation
         run: |
           echo "Tourism MLOps Pipeline Executed Successfully"
